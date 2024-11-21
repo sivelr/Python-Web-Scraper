@@ -1,1 +1,1 @@
-web: gunicorn EBS_webapp.py:app
+web: gunicorn EBS_webapp:app
