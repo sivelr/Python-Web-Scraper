@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eBay Scraper</title>
+    <style>
+        /* Style for the progress bar container */
+        #progress-container {
+            display: none; /* Initially hidden */
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+
+        /* Style for the progress bar */
+        #progress-bar {
+            width: 0;
+            height: 20px;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
+    </style>
+    <script>
+        // Function to show and simulate the progress bar
+        function showProgressBar() {
+            const progressContainer = document.getElementById("progress-container");
+            const progressBar = document.getElementById("progress-bar");
+
+            // Display the progress bar container
+            progressContainer.style.display = "block";
+
+            // Simulate progress (for demo purposes)
+            let progress = 0;
+            const interval = setInterval(() => {
+                if (progress >= 100) {
+                    clearInterval(interval);
+                } else {
+                    progress += 10; // Increment progress
+                    progressBar.style.width = progress + "%";
+                    progressBar.innerHTML = progress + "%";
+                }
+            }, 1000); // Adjust the interval as needed
+        }
+    </script>
+</head>
+<body>
+    <h1>eBay Scraper</h1>
+    <form action="/scrape" method="POST" onsubmit="showProgressBar()">
+        <label for="search_query">Search Term:</label>
+        <input type="text" id="search_query" name="search_query" required>
+        <br><br>
+        <label for="filename">CSV Filename:</label>
+        <input type="text" id="filename" name="filename" placeholder="output.csv">
+        <br><br>
+        <button type="submit">Scrape</button>
+    </form>
+
+    <!-- Progress Bar -->
+    <div id="progress-container">
+        <div id="progress-bar">0%</div>
+    </div>
+</body>
+</html>
