@@ -88,4 +88,4 @@ def scrape():
     return render_template('results.html', data=scraped_data, filename=filename)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
