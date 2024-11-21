@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraper Results</title>
+</head>
+<body>
+    <h1>Scraping Complete</h1>
+    <p>Data has been saved to <strong>{{ filename }}</strong>.</p>
+    <h2>Scraped Data:</h2>
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Availability / Items Sold</th>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>{{ item.Title }}</td>
+            <td>{{ item.Price }}</td>
+            <td>{{ item['Availability / Items Sold'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
