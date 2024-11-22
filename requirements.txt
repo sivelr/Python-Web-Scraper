@@ -4,4 +4,5 @@ requests==2.31.0
 gunicorn==20.1.0
 werkzeug<=2.2.2
 lxml==5.3.0
-
+Celery==5.2.7
+redis==5.0.9
