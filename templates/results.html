@@ -4,24 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scraper Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4caf50;
+            text-align: center;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 10px 0 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 <body>
-    <h1>Scraping Complete</h1>
-    <p>Data has been saved to <strong>{{ filename }}</strong>.</p>
-    <h2>Scraped Data:</h2>
-    <table border="1">
-        <tr>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Availability / Items Sold</th>
-        </tr>
-        {% for item in data %}
-        <tr>
-            <td>{{ item.Title }}</td>
-            <td>{{ item.Price }}</td>
-            <td>{{ item['Availability / Items Sold'] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <header>
+        <h1>Scraping Results</h1>
+    </header>
+    <main>
+        <p>Data has been saved to <strong>{{ filename }}</strong>.</p>
+        <h2>Scraped Data</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Availability / Items Sold</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item.Title }}</td>
+                    <td>{{ item.Price }}</td>
+                    <td>{{ item['Availability / Items Sold'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
 </body>
 </html>
