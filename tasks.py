@@ -6,7 +6,7 @@ import os
 
 # Initialize Celery
 redis_url = os.environ.get('REDIS_URL', 'redis://red-csvv58m8ii6s73ff506g:6379')
-celery_app = Celery('tasks', broker='REDIS_URL')
+celery_app = Celery('tasks', broker=redis_url)
 
 # Helper Functions
 def get_page(url):
