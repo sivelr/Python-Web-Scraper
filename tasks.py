@@ -5,7 +5,7 @@ import csv
 import os
 
 # Initialize Celery
-redis_url = os.environ.get('REDIS_URL', 'redis://red-csvv58m8ii6s73ff506g:6379')
+redis_url = os.environ.get('REDIS_URL', 'redis://red-csvvm59opnds73a5nafg:6379')
 celery_app = Celery('tasks', broker=redis_url)
 
 # Helper Functions
