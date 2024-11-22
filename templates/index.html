@@ -5,16 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>eBay Scraper</title>
     <style>
-        /* Style for the progress bar container */
-        #progress-container {
-            display: none; /* Initially hidden */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4caf50;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
             width: 100%;
-            background-color: #f3f3f3;
-            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #progress-container {
+            display: none;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
             margin-top: 20px;
         }
 
-        /* Style for the progress bar */
         #progress-bar {
             width: 0;
             height: 20px;
@@ -22,46 +79,48 @@
             text-align: center;
             line-height: 20px;
             color: white;
+            font-weight: bold;
         }
     </style>
     <script>
-        // Function to show and simulate the progress bar
         function showProgressBar() {
             const progressContainer = document.getElementById("progress-container");
             const progressBar = document.getElementById("progress-bar");
 
-            // Display the progress bar container
             progressContainer.style.display = "block";
 
-            // Simulate progress (for demo purposes)
             let progress = 0;
             const interval = setInterval(() => {
                 if (progress >= 100) {
                     clearInterval(interval);
                 } else {
-                    progress += 10; // Increment progress
+                    progress += 10;
                     progressBar.style.width = progress + "%";
                     progressBar.innerHTML = progress + "%";
                 }
-            }, 1000); // Adjust the interval as needed
+            }, 500);
         }
     </script>
 </head>
 <body>
-    <h1>eBay Scraper</h1>
-    <form action="/scrape" method="POST" onsubmit="showProgressBar()">
-        <label for="search_query">Search Term:</label>
-        <input type="text" id="search_query" name="search_query" required>
-        <br><br>
-        <label for="filename">CSV Filename:</label>
-        <input type="text" id="filename" name="filename" placeholder="output.csv">
-        <br><br>
-        <button type="submit">Scrape</button>
-    </form>
+    <header>
+        <h1>eBay Scraper</h1>
+    </header>
+    <main>
+        <form action="/scrape" method="POST" onsubmit="showProgressBar()">
+            <label for="search_query">Search Term:</label>
+            <input type="text" id="search_query" name="search_query" placeholder="e.g., Laptop" required>
 
-    <!-- Progress Bar -->
-    <div id="progress-container">
-        <div id="progress-bar">0%</div>
-    </div>
+            <label for="filename">CSV Filename:</label>
+            <input type="text" id="filename" name="filename" placeholder="output.csv">
+
+            <button type="submit">Start Scraping</button>
+        </form>
+
+        <!-- Progress Bar -->
+        <div id="progress-container">
+            <div id="progress-bar">0%</div>
+        </div>
+    </main>
 </body>
 </html>
