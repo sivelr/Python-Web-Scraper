@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from tasks import scrape_task  # Import the Celery task
+from celery.result import AsyncResult
 
 app = Flask(__name__)
 
@@ -16,16 +17,25 @@ def scrape():
     # Trigger the Celery task
     task = scrape_task.apply_async(args=[search_query, filename])
     
-    # Return a response with the task ID
-    return jsonify({
-        "task_id": task.id,
-        "status": "Task started. You can check the status using the /task-status/<task_id> endpoint."
-    })
+    # Redirect to the task results page
+    return redirect(url_for('render_task_results', task_id=task.id))
+
+@app.route('/task-results/<task_id>', methods=['GET'])
+def render_task_results(task_id):
+    result = AsyncResult(task_id)
+
+    if result.state == "PENDING":
+        return render_template('pending.html', task_id=task_id)
+    elif result.state == "SUCCESS":
+        return render_template('results.html', data=result.result)
+    elif result.state == "FAILURE":
+        return render_template('error.html', error=str(result.info))
+    else:
+        return render_template('pending.html', task_id=task_id)
 
 @app.route('/task-status/<task_id>', methods=['GET'])
 def task_status(task_id):
     # Check the status of the Celery task
-    from celery.result import AsyncResult
     result = AsyncResult(task_id)
 
     # Return task status information
