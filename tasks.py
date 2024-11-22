@@ -65,5 +65,4 @@ def scrape_task(search_query, filename="output.csv"):
             scraped_data.append(data)
             write_to_csv(data, filename)
 
-    return scraped_data  # This result will be available after the task completes
-
+    return scraped_data  # Task result
